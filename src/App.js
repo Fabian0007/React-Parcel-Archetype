@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  HashRouter,
+  BrowserRouter,
   Route,
   Switch,
   Redirect,
@@ -11,18 +11,20 @@ import './App.scss';
 
 const Login = React.lazy(() => import('./pages/Login/Login'));
 const Page404 = React.lazy(() => import('./pages/Page404/Page404'));
+const Home = React.lazy(() => import('./pages/Home/Home'));
 
 const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
 export default () => (
-  <HashRouter>
+  <BrowserRouter>
     <StoreContainer>
       <React.Suspense fallback={loading()}>
         <Switch>
           <Route exact path="/login" name="Login Page" render={props => <Login {...props} />} />
           <Route exact path="/404" name="Page 404" render={props => <Page404 {...props} />} />
+          <Route exact path="/" name="Home" render={props => <Home {...props} />} />
           <Redirect from="*" to="/404" />
         </Switch>
       </React.Suspense>
     </StoreContainer>
-  </HashRouter>
+  </BrowserRouter>
 );

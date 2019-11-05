@@ -12,6 +12,7 @@ import {
   InputGroupText,
   Row,
 } from 'reactstrap';
+import PropTypes from 'prop-types';
 import LoadButton from 'reactstrap-button-loader';
 import ReactNotification from 'react-notifications-component';
 import Services from './LoginServices';
@@ -21,8 +22,15 @@ import ErrorActions from '../../utils/Error/ErrorActions';
 import 'react-notifications-component/dist/theme.css';
 import Notifications from '../../utils/Builders/Notifications';
 
+const propTypes = {
+  history: PropTypes.shape(
+    {
+      push: PropTypes.func.isRequired,
+    },
+  ).isRequired,
+};
 
-const Login = (history) => {
+const Login = ({ history }) => {
   const { state, dispatch } = useContext(StoreContext);
   const notificationDOMRef = React.createRef();
   useEffect(() => {
@@ -117,5 +125,7 @@ const Login = (history) => {
     </div>
   );
 };
+
+Login.propTypes = propTypes;
 
 export default Login;
